@@ -31,3 +31,19 @@
     transform: rotate(360deg);
   }
 }
+
+.board {
+  display: grid;
+  grid-template-rows: 200px 200px 200px;
+  grid-template-columns: 200px 200px 200px;
+}
+
+.tile {
+  background-color: #303d4f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid whitesmoke;
+  margin: -5px;
+  font-size: 5rem;
+}
