@@ -11,7 +11,7 @@ export default function App() {
 
   function reset() {
     setBoardState(initBoardState);
-    setTurnState(true);
+    setTurnState(initPlayerState);
   }
 
   function addMove(index: number) {    
