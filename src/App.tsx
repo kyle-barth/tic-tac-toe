@@ -26,7 +26,7 @@ export default function App() {
     }
   }
 
-  function renderBoard(boardState: string[]) {
+  function renderBoard() {
     const renderTiles = boardState.map((x, index) => 
         <div key={ index } className='tile' onClick={() => { addMove(index) } }>
           { x }
@@ -45,7 +45,7 @@ export default function App() {
       <header className='App-header'>
         <h1>tic-tac-toe</h1>
 
-        { renderBoard(boardState) }
+        { renderBoard() }
 
         <Button variant="contained" style={{marginTop: "50px"}} onClick={() => { reset() }}>
           Reset Game
