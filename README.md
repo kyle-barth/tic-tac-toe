@@ -1,3 +1,7 @@
+# A simple tic-tac-toe game to explore React Hooks
+
+![alt text](https://raw.githubusercontent.com/kyle-barth/tic-tac-toe/master/tic-tac-toe.PNG)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
