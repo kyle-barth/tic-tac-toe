@@ -6,34 +6,34 @@ export default function App() {
   const initBoardState: string[] = new Array(9).fill('');
   const initPlayerState: boolean = true;
   
-  let [boardState, setBoardState] = useState(initBoardState);
-  let [playerTurnState, setTurnState] = useState(initPlayerState);
-  let [lastMoveIndex, setLastMoveIndex] = useState(0);
+  let [board, setBoardState] = useState(initBoardState);
+  let [playerTurn, setTurnState] = useState(initPlayerState);
+  let [lastMoveIndex, setLastMoveIndexState] = useState(0);
 
   function reset() {
     setBoardState(initBoardState);
     setTurnState(initPlayerState);
-    setLastMoveIndex(0);
+    setLastMoveIndexState(0);
   }
 
   function addMove(index: number) {    
-    setLastMoveIndex(index);
+    setLastMoveIndexState(index);
 
-    if (boardState[index] === ''){
-      setTurnState(!playerTurnState);
+    if (board[index] === ''){
+      setTurnState(!playerTurn);
 
-      if (playerTurnState) {
-        setBoardState([...boardState.slice(0, index), 'X', ...boardState.slice(index+1)]);
+      if (playerTurn) {
+        setBoardState([...board.slice(0, index), 'X', ...board.slice(index+1)]);
       } else {
-        setBoardState([...boardState.slice(0, index), 'O', ...boardState.slice(index+1)]);
+        setBoardState([...board.slice(0, index), 'O', ...board.slice(index+1)]);
       }
     }
   }
 
   function checkIfPlayerWon() {
-    if (boardState.includes('X' || 'O')) {
+    if (board.includes('X' || 'O')) {
       if (performCheck()) {
-        const winner = playerTurnState ? 'Player 2 Wins!' : 'Player 1 Wins!'
+        const winner = playerTurn ? 'Player 2 Wins!' : 'Player 1 Wins!'
 
         return (
           <div className='backdrop'>
@@ -73,35 +73,35 @@ export default function App() {
     const allEqual = (arr: string[]) => arr.every((v: string) => v === arr[0]);
 
     // check row
-    if (allEqual(boardState.slice(row, row+3))) {
+    if (allEqual(board.slice(row, row+3))) {
       return true;
     }
 
     // check column    
-    if (allEqual([boardState[column], boardState[column+3], boardState[column+6]])) {
+    if (allEqual([board[column], board[column+3], board[column+6]])) {
       return true;
     }
 
     // check diagonals
     if (lastMoveIndex === 0 || lastMoveIndex % 2 === 0) {
       if (lastMoveIndex === 4) {
-        if (allEqual([boardState[0], boardState[4], boardState[8]])) {
+        if (allEqual([board[0], board[4], board[8]])) {
           return true;
-        } else if (allEqual([boardState[2], boardState[4], boardState[6]])) {
+        } else if (allEqual([board[2], board[4], board[6]])) {
           return true;
         }
       } else if (lastMoveIndex === 0 || lastMoveIndex === 8) {
-        if (allEqual([boardState[0], boardState[4], boardState[8]])) {
+        if (allEqual([board[0], board[4], board[8]])) {
           return true;
         }
-      } else if (allEqual([boardState[2], boardState[4], boardState[6]])) {
+      } else if (allEqual([board[2], board[4], board[6]])) {
           return true;
       }
     }
   }
 
   function renderBoard() {
-    const renderTiles = boardState.map((x, index) => 
+    const renderTiles = board.map((x, index) => 
         <div key={ index } className='tile' onClick={() => { addMove(index) } }>
           { x }
         </div>
